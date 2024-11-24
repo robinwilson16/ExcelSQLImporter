@@ -6,17 +6,22 @@ This tool imports Excel files into SQL Tables and also optionally first download
 
 The tool was created as a replacement for Microsoft SQL Integration Services (SSIS) which can work well with smaller files but these days has a lot of limitations which this tool overcomes:
 - Excel columns that contain a large number of characters can be exported without any errors or changes being made to settings
-- All rows are evaluated when setting column sizes to avoid errors you get with SSIS when the first rows contain less data than subseqent rows and the column size is set to the maximum size needed (for the importer)
+- All rows are evaluated when setting column sizes to avoid errors you get with SSIS when the first rows contain less data than subsequent rows and the column size is set to the maximum size needed (for the importer)
 - Data types are detected automatically so will export correctly without code page errors, truncated values, missing values where a column mixes text and numbers
 - The tool is simpler to use as just requires .NET 9 runtime to be installed and does not require Excel binaries or data access components or any other special settings
+
+## Prereqisites
+
+You will need to install the Microsoft .NET Runtime 9.0 available from: https://dotnet.microsoft.com/en-us/download/dotnet/9.0
+Nothing else needs to be installed as this software can just be unzipped and run.
 
 ## Setting Up
 
 Download the latest release from: https://github.com/robinwilson16/ExcelSQLImporter/releases/latest
 
-If you have an Intel/AMD machine (most likely) then pick the `amd64` version but if you have a an ARM Snapdragon device then pick the 'arm64` version.
+If you have an Intel/AMD machine (most likely) then pick the `amd64` version but if you have a an ARM Snapdragon device then pick the `arm64` version.
 
-Downlaod and extract the zip file to a folder of your choice.
+Download and extract the zip file to a folder of your choice.
 
 Now edit the appsettings.json to fill in details for:
 | Item | Purpose |
