@@ -1,0 +1,7 @@
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\publish\arm64\ExcelSQLImporter.pdb
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\publish\arm64\appsettings3.json
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\publish\arm64\appsettings2.json
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\publish\arm64\appsettings.json
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\publish\arm64\WinSCP.exe
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\publish\arm64\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\publish\arm64\ExcelSQLImporter.exe
