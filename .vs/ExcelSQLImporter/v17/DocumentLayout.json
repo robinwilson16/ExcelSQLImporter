@@ -7,20 +7,20 @@
       "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson.shcg\\source\\repos\\excelsqlimporter\\excelsqlimporter\\appsettings2.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\appsettings2.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson.shcg\\source\\repos\\excelsqlimporter\\excelsqlimporter\\excelsqlimporter.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\excelsqlimporter.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson.shcg\\source\\repos\\excelsqlimporter\\excelsqlimporter\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson.shcg\\source\\repos\\excelsqlimporter\\excelsqlimporter\\appsettings3.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\appsettings3.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson.shcg\\source\\repos\\excelsqlimporter\\excelsqlimporter\\appsettings2.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\appsettings2.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson.shcg\\source\\repos\\excelsqlimporter\\excelsqlimporter\\excelsqlimporter.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\excelsqlimporter.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson.shcg\\source\\repos\\excelsqlimporter\\excelsqlimporter\\appsettings3.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\appsettings3.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "appsettings3.json",
               "DocumentMoniker": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\appsettings3.json",
               "RelativeDocumentMoniker": "ExcelSQLImporter\\appsettings3.json",
@@ -46,7 +46,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "appsettings2.json",
               "DocumentMoniker": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\appsettings2.json",
               "RelativeDocumentMoniker": "ExcelSQLImporter\\appsettings2.json",
@@ -58,14 +58,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "ExcelSQLImporter",
               "DocumentMoniker": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\ExcelSQLImporter.csproj",
               "RelativeDocumentMoniker": "ExcelSQLImporter\\ExcelSQLImporter.csproj",
               "ToolTip": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\ExcelSQLImporter.csproj",
               "RelativeToolTip": "ExcelSQLImporter\\ExcelSQLImporter.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-11-24T01:55:36.55Z"
+              "WhenOpened": "2024-11-24T01:55:36.55Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -88,9 +89,10 @@
               "RelativeDocumentMoniker": "ExcelSQLImporter\\Program.cs",
               "ToolTip": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\Program.cs",
               "RelativeToolTip": "ExcelSQLImporter\\Program.cs",
-              "ViewState": "AgIAALEAAAAAAAAAAAAAAMUAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAAAJMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T11:59:48.322Z"
+              "WhenOpened": "2024-11-23T11:59:48.322Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -143,6 +143,9 @@ namespace ExcelSQLImporter
                 {
                     using (Session session = new Session())
                     {
+                        //When publishing to a self-contained exe file need to specify the location of WinSCP.exe
+                        session.ExecutablePath = AppDomain.CurrentDomain.BaseDirectory + "\\WinSCP.exe";
+
                         // Connect
                         session.Open(sessionOptions);
 
