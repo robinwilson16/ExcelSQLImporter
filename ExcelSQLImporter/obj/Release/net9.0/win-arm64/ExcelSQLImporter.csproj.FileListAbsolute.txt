@@ -167,3 +167,4 @@ C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Re
 C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\win-arm64\ExcelSQLImporter.pdb
 C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\win-arm64\ExcelSQLImporter.genruntimeconfig.cache
 C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\win-arm64\ref\ExcelSQLImporter.dll
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\win-arm64\ExcelSQLImporter.sourcelink.json

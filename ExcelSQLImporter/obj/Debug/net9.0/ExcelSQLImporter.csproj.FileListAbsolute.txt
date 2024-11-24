@@ -175,3 +175,4 @@ C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\De
 C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Debug\net9.0\appsettings.json
 C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Debug\net9.0\appsettings3.json
 C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Debug\net9.0\appsettings2.json
+C:\Users\Robin.Wilson.SHCG\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Debug\net9.0\ExcelSQLImporter.sourcelink.json

@@ -30,12 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
@@ -44,7 +40,7 @@
               "RelativeDocumentMoniker": "ExcelSQLImporter\\appsettings3.json",
               "ToolTip": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\appsettings3.json",
               "RelativeToolTip": "ExcelSQLImporter\\appsettings3.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAYwBUAAABnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-11-24T09:10:37.173Z",
               "EditorCaption": ""
@@ -57,7 +53,7 @@
               "RelativeDocumentMoniker": "ExcelSQLImporter\\appsettings2.json",
               "ToolTip": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\appsettings2.json",
               "RelativeToolTip": "ExcelSQLImporter\\appsettings2.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-11-24T09:03:48.155Z",
               "EditorCaption": ""
@@ -82,7 +78,7 @@
               "RelativeDocumentMoniker": "ExcelSQLImporter\\appsettings.json",
               "ToolTip": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\appsettings.json",
               "RelativeToolTip": "ExcelSQLImporter\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-11-23T12:04:55.34Z",
               "EditorCaption": ""
@@ -95,7 +91,7 @@
               "RelativeDocumentMoniker": "ExcelSQLImporter\\Program.cs",
               "ToolTip": "C:\\Users\\Robin.Wilson.SHCG\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\Program.cs",
               "RelativeToolTip": "ExcelSQLImporter\\Program.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGAAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAALEAAAAAAAAAAAAAAMUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-23T11:59:48.322Z",
               "EditorCaption": ""

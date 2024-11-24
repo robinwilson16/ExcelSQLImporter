@@ -19,6 +19,7 @@ using NPOI.OpenXmlFormats.Spreadsheet;
 using NPOI.HPSF;
 using Org.BouncyCastle.Bcpg;
 using NPOI.Util;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ExcelSQLImporter
 {
@@ -60,9 +61,11 @@ namespace ExcelSQLImporter
             }
             
             var databaseConnection = config.GetSection("DatabaseConnection");
+            var databaseTable = config.GetSection("DatabaseTable");
             var excelFile = config.GetSection("ExcelFile");
             var ftpConnection = config.GetSection("FTPConnection");
             string excelFilePath = excelFile["Folder"] + "\\" + excelFile["FileName"];
+            string? excelFileNameNoExtension = excelFile["FileName"]?.Substring(0, excelFile["FileName"]!.LastIndexOf("."));
 
             var sqlConnection = new SqlConnectionStringBuilder
             {
@@ -184,10 +187,31 @@ namespace ExcelSQLImporter
                     book = WorkbookFactory.Create(file);
                 }
 
-                //ISheet sheet = book.GetSheet("Sheet1");
-                ISheet sheet = book.GetSheetAt(0);
+                ISheet sheet;
+
+                //Get first sheet in Excel file if not name specified
+                if (!String.IsNullOrEmpty(excelFile["SheetName"])) {
+                    sheet = book.GetSheet(excelFile["SheetName"]);
+                }
+                else {
+                    sheet = book.GetSheetAt(0);
+                }
+
                 string sheetName = sheet.SheetName;
-                table = new DataTable(sheetName);
+
+                switch(databaseTable["TableNamingMethod"])
+                {
+                    case "SheetName":
+                        table = new DataTable(databaseTable["TablePrefix"] + sheetName);
+                        break;
+                    case "FileName":
+                        table = new DataTable(databaseTable["TablePrefix"] + excelFileNameNoExtension);
+                        break;
+                    default:
+                        table = new DataTable(databaseTable["TablePrefix"] + sheetName);
+                        break;
+                }
+
                 table.Rows.Clear();
                 table.Columns.Clear();
 

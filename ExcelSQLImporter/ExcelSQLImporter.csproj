@@ -12,6 +12,12 @@
     <PackageTags>Excel, SQL, SSIS</PackageTags>
     <Description>Imports Excel files into SQL Tables and also optionally first downloads them from an FTP site for integrations with cloud systems and provide an easier solution compared with SSIS which will often not work well with large text fields</Description>
     <PackageLicenseExpression> GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/robinwilson16/ExcelSQLImporter</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/robinwilson16/ExcelSQLImporter</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="G:\My Drive\Pictures\Excel Export Icons\ExcelImportIcon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
