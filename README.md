@@ -1,6 +1,9 @@
-# Excel SQL Exporter
+# Excel SQL Importer
 
 This tool imports Excel files into SQL Tables and also optionally first downloads them from an FTP site for integrations with cloud systems and provide an easier solution compared with SSIS which will often not work well with large text fields
+
+If you are looking for a tool that works the other way around exporting from SQL into Excel then please see the other project instead:
+https://github.com/robinwilson16/ExcelSQLExporter
 
 ## Purpose
 
