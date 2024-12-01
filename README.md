@@ -47,7 +47,7 @@ ExcelSQLImporter.exe FinanceImport.json
 
 ## Setting Up a Schedule
 
-You can just click on may wish to set up a schedule to import one or more Excel files each night and the best way to do this in Windows is to use Task Scheduler which is available in all modern versions of Windows.
+You can just click on may wish to set up a schedule to import one or more Excel files each night and the best way to do this in Windows is to use Task Scheduler which is available in all supported versions of Windows.
 
 Create a new task and name it based on the Excel file it will import so for example:
 ```
@@ -63,7 +63,7 @@ On the Actions tab specify the location of the Excel SQL Import tool under Progr
 D:\ExcelSQLImporter\ExcelSQLImporter.exe
 ```
 
-Optionally if you are importing more than one file then enter the name of this into the arguments box - e.g.:
+Optionally if you are importing more than one file then enter the name of this into the arguments box for each task you set up - e.g.:
 ```
 UsersTable.json
 ```

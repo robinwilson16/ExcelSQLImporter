@@ -20,6 +20,7 @@ using NPOI.HPSF;
 using Org.BouncyCastle.Bcpg;
 using NPOI.Util;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 
 namespace ExcelSQLImporter
 {
@@ -29,7 +30,10 @@ namespace ExcelSQLImporter
         {
             Console.WriteLine("\nImport Excel File to SQL Table");
             Console.WriteLine("=========================================\n");
-            Console.WriteLine("Copyright Robin Wilson");
+
+            string? productVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
+            Console.WriteLine($"Version {productVersion}");
+            Console.WriteLine($"Copyright Robin Wilson");
 
             string configFile = "appsettings.json";
             string? customConfigFile = null;
@@ -64,7 +68,8 @@ namespace ExcelSQLImporter
             var databaseTable = config.GetSection("DatabaseTable");
             var excelFile = config.GetSection("ExcelFile");
             var ftpConnection = config.GetSection("FTPConnection");
-            string excelFilePath = excelFile["Folder"] + "\\" + excelFile["FileName"];
+            string[]? filePaths = { @excelFile["Folder"] ?? "", excelFile["FileName"] ?? "" };
+            string excelFilePath = Path.Combine(filePaths);
             string? excelFileNameNoExtension = excelFile["FileName"]?.Substring(0, excelFile["FileName"]!.LastIndexOf("."));
 
             var sqlConnection = new SqlConnectionStringBuilder
@@ -175,7 +180,7 @@ namespace ExcelSQLImporter
             }
             else
             {
-                Console.WriteLine($"Not Uploading File to FTP as Option in Config is False");
+                Console.WriteLine($"Not Downloading File to FTP as Option in Config is False");
             }
 
             //Load Excel File
@@ -388,39 +393,56 @@ namespace ExcelSQLImporter
                 return 1;
             }
 
+            Console.WriteLine($"Loaded {table?.Rows.Count} rows of data from file");
 
             //Save to Database
-            Console.WriteLine($"Creating Table {table.TableName} in Database");
+            Console.WriteLine($"Creating Table {table?.TableName} in Database");
             await using var connection = new SqlConnection(connectionString);
+
             try
             {
                 await connection.OpenAsync();
 
-                string createTableSQL = CreateTableSQL(table.TableName, table);
-                //Console.WriteLine($"{createTableSQL}");
+                if (table != null)
+                {
+                    string createTableSQL = CreateTableSQL(table?.TableName ?? "Imported_Excel_File", table!);
+                    //Console.WriteLine($"{createTableSQL}");
 
-                using (SqlCommand command = new SqlCommand(createTableSQL, connection))
-                    command.ExecuteNonQuery();
+                    using (SqlCommand command = new SqlCommand(createTableSQL, connection))
+                        command.ExecuteNonQuery();
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+
+                if (connection != null)
+                {
+                    await connection.CloseAsync();
+                }
+
                 return 1;
             }
 
-            Console.WriteLine($"Uploading {table.Rows.Count} Rows of Data into Table {table.TableName} in Database");
+            Console.WriteLine($"Uploading {table?.Rows.Count} Rows of Data into Table {table?.TableName} in Database");
 
             try
             {
                 SqlBulkCopy bulkcopy = new SqlBulkCopy(connection);
-                bulkcopy.DestinationTableName = table.TableName;
+                bulkcopy.DestinationTableName = table?.TableName;
 
-                bulkcopy.WriteToServer(table);
-                connection.Close();
+                await bulkcopy.WriteToServerAsync(table);
+                await connection.CloseAsync();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+
+                if (connection != null)
+                {
+                    await connection.CloseAsync();
+                }
+
                 return 1;
             }
 
