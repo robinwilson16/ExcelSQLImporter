@@ -5,10 +5,10 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <ApplicationIcon>ExcelImportIcon.ico</ApplicationIcon>
+    <ApplicationIcon>ExcelToSQL.ico</ApplicationIcon>
     <Title>Excel SQL Importer</Title>
     <Copyright>Robin Wilson</Copyright>
-    <PackageIcon>ExcelImportIcon.png</PackageIcon>
+    <PackageIcon>ExcelToSQL.png</PackageIcon>
     <PackageTags>Excel, SQL, SSIS</PackageTags>
     <Description>Imports Excel files into SQL Tables and also optionally first downloads them from an FTP site for integrations with cloud systems and provide an easier solution compared with SSIS which will often not work well with large text fields</Description>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
@@ -30,7 +30,7 @@
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ExcelImportIcon.ico" />
+    <Content Include="ExcelToSQL.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +38,7 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="G:\My Drive\Pictures\Excel Export Icons\ExcelImportIcon.png">
+    <None Include="G:\My Drive\Dev\Excel Import and Export Tools\ExcelToSQL.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

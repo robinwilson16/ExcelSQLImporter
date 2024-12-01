@@ -227,15 +227,6 @@ namespace ExcelSQLImporter
                 {
                     DataRow? tableRow = null;
                     IRow? row = sheet.GetRow(rowIndex);
-                    IRow? row2 = null;
-                    IRow? row3 = null;
-
-                    if (rowIndex == 0)
-                    {
-                        //If first row then need second row to check data types (check row 3 too)
-                        row2 = sheet.GetRow(rowIndex + 1);
-                        row3 = sheet.GetRow(rowIndex + 2);
-                    }
 
                     if (row != null) //Check row does not only contains empty cells
                     {
@@ -247,62 +238,52 @@ namespace ExcelSQLImporter
 
                         int colIndex = 0;
 
-                        //For each cell in the row
+                        //Process rows and place into data table with named columns, correct data types
                         foreach (ICell cell in row.Cells)
                         {
                             object? cellValue = null;
-                            string? cellType = "";
-                            string[] cellType2 = new string[2];
+                            string? fieldTypeToUse = "";
+                            List<string> fieldTypes = new List<string>();
 
+                            //If first row then add named columns and don't add a row
                             if (rowIndex == 0)
                             {
-                                //Row 0 Should Contain Row Titles in Excel
-                                for (int i = 0; i < 2; i++)
+                                //Check all cell types for this column excluding header row to pick best type
+                                for (int i = 0; i < sheet.LastRowNum; i++)
                                 {
-                                    ICell? cell2 = null;
-                                    if (i == 0)
-                                    {
-                                        cell2 = row2?.GetCell(cell.ColumnIndex);
-                                    }
-                                    else
-                                    {
-                                        cell2 = row3?.GetCell(cell.ColumnIndex);
-                                    }
+                                    IRow? rowToCheck = sheet.GetRow(i + 1);
+                                    ICell? cellInRow = rowToCheck?.GetCell(cell.ColumnIndex);
+                                    string fieldType = "System.String";
 
-                                    if (cell2 != null)
+                                    if (cellInRow != null)
                                     {
-                                        switch (cell2.CellType)
+                                        switch (cellInRow.CellType)
                                         {
-                                            case CellType.Blank: break;
-                                            case CellType.Boolean: cellType2[i] = "System.Boolean"; break;
-                                            case CellType.String: cellType2[i] = "System.String"; break;
+                                            case CellType.Blank: cellValue = DBNull.Value; break;
+                                            case CellType.Boolean: cellValue = cellInRow.BooleanCellValue; fieldType = "System.Boolean"; break;
+                                            case CellType.String: cellValue = cellInRow.StringCellValue; fieldType = "System.String"; break;
                                             case CellType.Numeric:
-                                                if (HSSFDateUtil.IsCellDateFormatted(cell2))
-                                                {
-                                                    cellType2[i] = "System.DateTime";
-                                                }
-                                                else
-                                                {
-                                                    cellType2[i] = "System.Double";
-                                                }
+                                                if (HSSFDateUtil.IsCellDateFormatted(cellInRow)) { cellValue = cellInRow.DateCellValue; fieldType = "System.DateTime"; }
+                                                else { cellValue = cellInRow.NumericCellValue; fieldType = "System.Double"; }
                                                 break;
 
                                             case CellType.Formula:
                                                 bool cont = true;
-                                                switch (cell2.CachedFormulaResultType)
+                                                switch (cellInRow.CachedFormulaResultType)
                                                 {
-                                                    case CellType.Boolean: cellType2[i] = "System.Boolean"; break;
-                                                    case CellType.String: cellType2[i] = "System.String"; break;
+                                                    case CellType.Blank: cellValue = DBNull.Value; break;
+                                                    case CellType.String: cellValue = cellInRow.StringCellValue; fieldType = "System.String"; break;
+                                                    case CellType.Boolean: cellValue = cellInRow.BooleanCellValue; fieldType = "System.Boolean"; break;
                                                     case CellType.Numeric:
-                                                        if (HSSFDateUtil.IsCellDateFormatted(cell2)) { cellType2[i] = "System.DateTime"; }
+                                                        if (HSSFDateUtil.IsCellDateFormatted(cellInRow)) { cellValue = cellInRow.DateCellValue; fieldType = "System.DateTime"; }
                                                         else
                                                         {
                                                             try
                                                             {
                                                                 //Check if Boolean
-                                                                if (cell2.CellFormula == "TRUE()") { cellType2[i] = "System.Boolean"; cont = false; }
-                                                                if (cont && cell2.CellFormula == "FALSE()") { cellType2[i] = "System.Boolean"; cont = false; }
-                                                                if (cont) { cellType2[i] = "System.Double"; cont = false; }
+                                                                if (cellInRow.CellFormula == "TRUE()") { cellValue = cellInRow.BooleanCellValue; fieldType = "System.Boolean"; cont = false; }
+                                                                if (cont && cellInRow.CellFormula == "FALSE()") { cellValue = cellInRow.BooleanCellValue; fieldType = "System.Boolean"; cont = false; }
+                                                                if (cont) { cellValue = cellInRow.NumericCellValue; fieldType = "System.Double"; cont = false; }
                                                             }
                                                             catch { }
                                                         }
@@ -310,18 +291,62 @@ namespace ExcelSQLImporter
                                                 }
                                                 break;
                                             default:
-                                                cellType2[i] = "System.String"; break;
+                                                fieldType = "System.String"; break;
+                                        }
+
+                                        if (cellValue?.ToString()?.Length > 0)
+                                        {
+                                            fieldTypes.Add(fieldType);
+
+                                            //Output types to check for specific column
+                                            //if (colIndex == 35)
+                                            //{
+                                            //    Console.WriteLine($"Value '{cellValue}' is {cellInRow.CellType}");
+                                            //}
                                         }
                                     }
                                 }
 
-                                //Resolve different types
-                                if (cellType2[0] == cellType2[1]) { cellType = cellType2[0]; }
+                                //Pick best type of field
+                                if (fieldTypes.Contains("System.String"))
+                                {
+                                    //If any of the rows contain a string then need to set row to that to be able to store all values
+                                    fieldTypeToUse = "System.String";
+                                }
+                                else if (fieldTypes.Contains("System.Double") && fieldTypes.Contains("System.DateTime"))
+                                {
+                                    //If rows are mixed types then store as string
+                                    fieldTypeToUse = "System.String";
+                                }
+                                else if (fieldTypes.Contains("System.Int32") && fieldTypes.Contains("System.DateTime"))
+                                {
+                                    //If rows are mixed types then store as string
+                                    fieldTypeToUse = "System.String";
+                                }
+                                else if (fieldTypes.Contains("System.Boolean") && fieldTypes.Contains("System.DateTime"))
+                                {
+                                    //If rows are mixed types then store as string
+                                    fieldTypeToUse = "System.String";
+                                }
+                                else if (fieldTypes.Contains("System.Double"))
+                                {
+                                    fieldTypeToUse = "System.Double";
+                                }
+                                else if (fieldTypes.Contains("System.Int32"))
+                                {
+                                    fieldTypeToUse = "System.Int32";
+                                }
+                                else if (fieldTypes.Contains("System.Boolean"))
+                                {
+                                    fieldTypeToUse = "System.Boolean";
+                                }
+                                else if (fieldTypes.Contains("System.DateTime"))
+                                {
+                                    fieldTypeToUse = "System.DateTime";
+                                }
                                 else
                                 {
-                                    if (cellType2[0] == null) cellType = cellType2[1];
-                                    if (cellType2[1] == null) cellType = cellType2[0];
-                                    if (cellType == "") cellType = "System.String";
+                                    fieldTypeToUse = "System.String";
                                 }
 
                                 //Get the name of the column
@@ -336,7 +361,7 @@ namespace ExcelSQLImporter
                                 }
 
                                 //Add field to the table
-                                DataColumn tableColumn = new DataColumn(colName, Type.GetType(cellType) ?? typeof(string));
+                                DataColumn tableColumn = new DataColumn(colName, Type.GetType(fieldTypeToUse) ?? typeof(string));
                                 table.Columns.Add(tableColumn); colIndex++;
                             }
                             else
@@ -352,6 +377,7 @@ namespace ExcelSQLImporter
                                         else { cellValue = cell.NumericCellValue; }
                                         break;
                                     case CellType.Formula:
+                                        bool cont = true;
                                         switch (cell.CachedFormulaResultType)
                                         {
                                             case CellType.Blank: cellValue = DBNull.Value; break;
@@ -359,7 +385,17 @@ namespace ExcelSQLImporter
                                             case CellType.Boolean: cellValue = cell.BooleanCellValue; break;
                                             case CellType.Numeric:
                                                 if (HSSFDateUtil.IsCellDateFormatted(cell)) { cellValue = cell.DateCellValue; }
-                                                else { cellValue = cell.NumericCellValue; }
+                                                else
+                                                {
+                                                    try
+                                                    {
+                                                        //Check if Boolean
+                                                        if (cell.CellFormula == "TRUE()") { cellValue = cell.BooleanCellValue; cont = false; }
+                                                        if (cont && cell.CellFormula == "FALSE()") { cellValue = cell.BooleanCellValue; cont = false; }
+                                                        if (cont) { cellValue = cell.NumericCellValue; cont = false; }
+                                                    }
+                                                    catch { }
+                                                }
                                                 break;
                                         }
                                         break;
