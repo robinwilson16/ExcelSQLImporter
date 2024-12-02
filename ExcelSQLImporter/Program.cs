@@ -21,6 +21,7 @@ using Org.BouncyCastle.Bcpg;
 using NPOI.Util;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Globalization;
 
 namespace ExcelSQLImporter
 {
@@ -63,11 +64,21 @@ namespace ExcelSQLImporter
                 Console.WriteLine("Error: {0}", e);
                 return 1;
             }
-            
+
+            Console.WriteLine($"\nSetting Locale To {config["Locale"]}");
+
+            //Set locale to ensure dates and currency are correct
+            CultureInfo culture = new CultureInfo(config["Locale"] ?? "en-GB");
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             var databaseConnection = config.GetSection("DatabaseConnection");
             var databaseTable = config.GetSection("DatabaseTable");
             var excelFile = config.GetSection("ExcelFile");
             var ftpConnection = config.GetSection("FTPConnection");
+            var storedProcedure = config.GetSection("StoredProcedure");
             string[]? filePaths = { @excelFile["Folder"] ?? "", excelFile["FileName"] ?? "" };
             string excelFilePath = Path.Combine(filePaths);
             string? excelFileNameNoExtension = excelFile["FileName"]?.Substring(0, excelFile["FileName"]!.LastIndexOf("."));
@@ -445,7 +456,7 @@ namespace ExcelSQLImporter
                     //Console.WriteLine($"{createTableSQL}");
 
                     using (SqlCommand command = new SqlCommand(createTableSQL, connection))
-                        command.ExecuteNonQuery();
+                        await command.ExecuteNonQueryAsync();
                 }
             }
             catch (Exception e)
@@ -468,7 +479,6 @@ namespace ExcelSQLImporter
                 bulkcopy.DestinationTableName = table?.TableName;
 
                 await bulkcopy.WriteToServerAsync(table);
-                await connection.CloseAsync();
             }
             catch (Exception e)
             {
@@ -480,6 +490,50 @@ namespace ExcelSQLImporter
                 }
 
                 return 1;
+            }
+
+            //Run Stored Procedure On Completion
+            if (storedProcedure.GetValue<bool?>("RunTask", false) == true)
+            {
+                Console.WriteLine($"Running Stored Procedure: {storedProcedure["Database"]}.{storedProcedure["Schema"]}.{storedProcedure["StoredProcedure"]}");
+
+                if (storedProcedure["StoredProcedure"]?.Length > 0)
+                {
+                    try
+                    {
+                        if (table != null)
+                        {
+                            string customTaskSQL = $"EXEC {storedProcedure["Database"]}.{storedProcedure["Schema"]}.{storedProcedure["StoredProcedure"]}";
+                            //Console.WriteLine($"{createTableSQL}");
+
+                            using (SqlCommand command = new SqlCommand(customTaskSQL, connection))
+                                await command.ExecuteNonQueryAsync();
+
+                            Console.WriteLine($"Stored Procedure Completed");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+
+                        if (connection != null)
+                        {
+                            await connection.CloseAsync();
+                        }
+
+                        return 1;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Cannot run stored procedure as it has not been specified in the config file");
+                }
+            }
+
+            //Close database connection
+            if (connection != null)
+            {
+                await connection.CloseAsync();
             }
 
             return 0;
