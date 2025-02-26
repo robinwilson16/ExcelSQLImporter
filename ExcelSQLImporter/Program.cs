@@ -76,6 +76,7 @@ namespace ExcelSQLImporter
 
             var databaseConnection = config.GetSection("DatabaseConnection");
             var databaseTable = config.GetSection("DatabaseTable");
+            string? schemaName = databaseTable["Schema"] ?? "dbo";
             var excelFile = config.GetSection("ExcelFile");
             var ftpConnection = config.GetSection("FTPConnection");
             var storedProcedure = config.GetSection("StoredProcedure");
@@ -223,13 +224,13 @@ namespace ExcelSQLImporter
                 switch(databaseTable["TableNamingMethod"])
                 {
                     case "SheetName":
-                        table = new DataTable(databaseTable["TablePrefix"] + sheetName);
+                        table = new DataTable(databaseTable["TablePrefix"] + databaseTable["TableNameOverride"] ?? sheetName);
                         break;
                     case "FileName":
-                        table = new DataTable(databaseTable["TablePrefix"] + excelFileNameNoExtension);
+                        table = new DataTable(databaseTable["TablePrefix"] + databaseTable["TableNameOverride"] ?? excelFileNameNoExtension);
                         break;
                     default:
-                        table = new DataTable(databaseTable["TablePrefix"] + sheetName);
+                        table = new DataTable(databaseTable["TablePrefix"] + databaseTable["TableNameOverride"] ?? sheetName);
                         break;
                 }
 
@@ -454,7 +455,7 @@ namespace ExcelSQLImporter
 
                 if (table != null)
                 {
-                    string createTableSQL = CreateTableSQL(table?.TableName ?? "Imported_Excel_File", table!);
+                    string createTableSQL = CreateTableSQL(schemaName ?? "dbo", table?.TableName ?? "Imported_Excel_File", table!);
                     //Console.WriteLine($"{createTableSQL}");
 
                     using (SqlCommand command = new SqlCommand(createTableSQL, connection))
@@ -541,11 +542,11 @@ namespace ExcelSQLImporter
             return 0;
         }
 
-        public static string CreateTableSQL(string tableName, DataTable table)
+        public static string CreateTableSQL(string schemaName, string tableName, DataTable table)
         {
             string sqlsc;
-            sqlsc = "\n DROP TABLE IF EXISTS [" + tableName + "];";
-            sqlsc += "\n CREATE TABLE [" + tableName + "] (";
+            sqlsc = $"\n DROP TABLE IF EXISTS [{schemaName ?? "dbo"}].[{tableName}];";
+            sqlsc += $"\n CREATE TABLE [{schemaName ?? "dbo"}].[{tableName}] (";
 
             //Check Cell Value
             //Console.WriteLine(table.Rows[1][4].ToString());
