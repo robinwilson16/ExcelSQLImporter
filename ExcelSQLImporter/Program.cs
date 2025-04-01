@@ -607,9 +607,11 @@ namespace ExcelSQLImporter
                     string maxRowLengthString = "";
                     if (table.Columns[i].MaxLength == -1)
                     {
-                        for (int rowIndex = 1; rowIndex < table.Rows.Count; rowIndex++)
+                        for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++)
                         {
                             rowLength = (table.Rows[rowIndex][i].ToString() ?? "").Length;
+                            //Console.WriteLine($"Column: {i}, Row: {rowIndex}, Length: {rowLength}");
+
                             if (rowLength > maxRowLength)
                             {
                                 maxRowLength = rowLength;
