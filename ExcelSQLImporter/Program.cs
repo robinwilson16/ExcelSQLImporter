@@ -124,7 +124,7 @@ namespace ExcelSQLImporter
                     Password = ftpConnection["Password"]
                 };
 
-                switch(ftpConnection["Type"])
+                switch(ftpConnection?["Type"])
                 {
                     case "FTP":
                         sessionOptions.Protocol = Protocol.Ftp;
@@ -138,12 +138,22 @@ namespace ExcelSQLImporter
                         sessionOptions.Protocol = Protocol.Sftp;
                         sessionOptions.GiveUpSecurityAndAcceptAnyTlsHostCertificate = true;
                         break;
+                    case "SCP":
+                        sessionOptions.Protocol = Protocol.Scp;
+                        sessionOptions.GiveUpSecurityAndAcceptAnyTlsHostCertificate = true;
+                        break;
                     default:
                         sessionOptions.Protocol = Protocol.Ftp;
                         break;
                 }
 
-                switch (ftpConnection["Mode"])
+                if (ftpConnection?["SSHHostKeyFingerprint"]?.Length > 0)
+                {
+                    sessionOptions.SshHostKeyFingerprint = ftpConnection["SSHHostKeyFingerprint"];
+                    sessionOptions.GiveUpSecurityAndAcceptAnyTlsHostCertificate = false;
+                }
+
+                switch (ftpConnection?["Mode"])
                 {
                     case "Active":
                         sessionOptions.FtpMode = FtpMode.Active;
@@ -220,17 +230,23 @@ namespace ExcelSQLImporter
                 }
 
                 string sheetName = sheet.SheetName;
+                string? tableNameOverride = null;
 
-                switch(databaseTable["TableNamingMethod"])
+                if (databaseTable?["TableNameOverride"]?.Length > 0)
+                {
+                    tableNameOverride = databaseTable?["TableNameOverride"];
+                }
+
+                switch(databaseTable?["TableNamingMethod"])
                 {
                     case "SheetName":
-                        table = new DataTable(databaseTable["TablePrefix"] + databaseTable["TableNameOverride"] ?? sheetName);
+                        table = new DataTable(databaseTable?["TablePrefix"] + (tableNameOverride ?? sheetName));
                         break;
                     case "FileName":
-                        table = new DataTable(databaseTable["TablePrefix"] + databaseTable["TableNameOverride"] ?? excelFileNameNoExtension);
+                        table = new DataTable(databaseTable?["TablePrefix"] + (tableNameOverride ?? excelFileNameNoExtension));
                         break;
                     default:
-                        table = new DataTable(databaseTable["TablePrefix"] + databaseTable["TableNameOverride"] ?? sheetName);
+                        table = new DataTable(databaseTable?["TablePrefix"] + (tableNameOverride ?? sheetName));
                         break;
                 }
 
