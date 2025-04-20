@@ -166,6 +166,7 @@ namespace ExcelSQLImporter
                         break;
                 }
 
+                Console.WriteLine("\nDownloading Excel File");
                 Console.WriteLine($"Downloding File {excelFile["FileName"]} From {sessionOptions.HostName}");
 
                 try
@@ -178,13 +179,20 @@ namespace ExcelSQLImporter
                         // Connect
                         session.Open(sessionOptions);
 
-                        // Upload files
+                        // Download files
+                        string downloadpath = Path.Combine("/", ftpConnection?["FolderPath"] ?? "");
+
+                        if (downloadpath.Substring(downloadpath.Length - 1) != "/")
+                        {
+                            downloadpath = downloadpath + "/";
+                        }
+
                         TransferOptions transferOptions = new TransferOptions();
                         transferOptions.TransferMode = TransferMode.Binary;
 
                         TransferOperationResult transferResult;
                         transferResult =
-                            session.GetFiles("/" + excelFile["FileName"], @excelFilePath, false, transferOptions);
+                            session.GetFiles(downloadpath + excelFile["FileName"], @excelFilePath, false, transferOptions);
 
                         // Throw on any error
                         transferResult.Check();
@@ -192,7 +200,7 @@ namespace ExcelSQLImporter
                         // Print results
                         foreach (TransferEventArgs transfer in transferResult.Transfers)
                         {
-                            Console.WriteLine("Download of {0} succeeded", transfer.FileName);
+                            Console.WriteLine("Download of {0} succeeded from {1}", transfer.FileName, downloadpath);
                         }
                     }
                 }
@@ -208,6 +216,7 @@ namespace ExcelSQLImporter
             }
 
             //Load Excel File
+            Console.WriteLine("\nLoading Data from Excel");
             Console.WriteLine($"Loading Excel File from {excelFilePath}");
 
             IWorkbook book;
@@ -462,6 +471,7 @@ namespace ExcelSQLImporter
             Console.WriteLine($"Loaded {table?.Rows.Count} rows of data from file");
 
             //Save to Database
+            Console.WriteLine("\nSaving Data To Database");
             Console.WriteLine($"Creating Table {table?.TableName} in Database");
             await using var connection = new SqlConnection(connectionString);
 
@@ -514,6 +524,7 @@ namespace ExcelSQLImporter
             //Run Stored Procedure On Completion
             if (storedProcedure.GetValue<bool?>("RunTask", false) == true)
             {
+                Console.WriteLine("\nRunning Post Import Stored Procedure");
                 Console.WriteLine($"Running Stored Procedure: {storedProcedure["Database"]}.{storedProcedure["Schema"]}.{storedProcedure["StoredProcedure"]}");
 
                 if (storedProcedure["StoredProcedure"]?.Length > 0)
