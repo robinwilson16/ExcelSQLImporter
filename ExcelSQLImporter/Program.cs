@@ -22,6 +22,7 @@ using NPOI.Util;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Globalization;
+using ExcelSQLImporter.Services;
 
 namespace ExcelSQLImporter
 {
@@ -29,12 +30,19 @@ namespace ExcelSQLImporter
     {
         static async Task<int> Main(string[] args)
         {
-            Console.WriteLine("\nImport Excel File to SQL Table");
-            Console.WriteLine("=========================================\n");
+            bool? logToFile = true;
+            bool? outputToScreen = true;
+
+            string? toolName = Assembly.GetExecutingAssembly().GetName().Name;
+            string logFileName = $"{toolName} - {DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss")}.log";
+
+            await LoggingService.Log(toolName, logFileName, logToFile, outputToScreen);
+            await LoggingService.Log("Import Excel File to SQL Table", logFileName, logToFile, outputToScreen);
+            await LoggingService.Log("=========================================", logFileName, logToFile, outputToScreen);
 
             string? productVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
-            Console.WriteLine($"Version {productVersion}");
-            Console.WriteLine($"Copyright Robin Wilson");
+            await LoggingService.Log($"\nVersion {productVersion}", logFileName, logToFile, outputToScreen);
+            await LoggingService.Log($"\nCopyright Robin Wilson", logFileName, logToFile, outputToScreen);
 
             string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
             string? customConfigFile = null;
@@ -48,7 +56,7 @@ namespace ExcelSQLImporter
                 configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, customConfigFile);
             }
 
-            Console.WriteLine($"\nUsing Config File {configFile}");
+            await LoggingService.Log($"\nUsing Config File {configFile}", logFileName, logToFile, outputToScreen);
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -61,11 +69,11 @@ namespace ExcelSQLImporter
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: {0}", e);
+                await LoggingService.Log($"Error: {e}", logFileName, logToFile, outputToScreen);
                 return 1;
             }
 
-            Console.WriteLine($"\nSetting Locale To {config["Locale"]}");
+            await LoggingService.Log($"\nSetting Locale To {config["Locale"]}", logFileName, logToFile, outputToScreen);
 
             //Set locale to ensure dates and currency are correct
             CultureInfo culture = new CultureInfo(config["Locale"] ?? "en-GB");
@@ -107,7 +115,7 @@ namespace ExcelSQLImporter
             //{
             //    if (sheet.GetRow(row) != null) //null is when the row only contains empty cells 
             //    {
-            //        Console.WriteLine(string.Format("Row {0} = {1}", row, sheet.GetRow(row).GetCell(1).StringCellValue));
+            //        await LoggingService.Log(string.Format("Row {0} = {1}", row, sheet.GetRow(row).GetCell(1).StringCellValue));
             //    }
             //}
 
@@ -166,8 +174,8 @@ namespace ExcelSQLImporter
                         break;
                 }
 
-                Console.WriteLine("\nDownloading Excel File");
-                Console.WriteLine($"Downloding File {excelFile["FileName"]} From {sessionOptions.HostName}");
+                await LoggingService.Log("\nDownloading Excel File", logFileName, logToFile, outputToScreen);
+                await LoggingService.Log($"Downloding File {excelFile["FileName"]} From {sessionOptions.HostName}", logFileName, logToFile, outputToScreen);
 
                 try
                 {
@@ -200,24 +208,24 @@ namespace ExcelSQLImporter
                         // Print results
                         foreach (TransferEventArgs transfer in transferResult.Transfers)
                         {
-                            Console.WriteLine("Download of {0} succeeded from {1}", transfer.FileName, downloadpath);
+                            await LoggingService.Log($"Download of {transfer.FileName} succeeded from {downloadpath}", logFileName, logToFile, outputToScreen);
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Error: {0}", e);
+                    await LoggingService.Log($"Error: {e}", logFileName, logToFile, outputToScreen);
                     return 1;
                 }
             }
             else
             {
-                Console.WriteLine($"Not Downloading File to FTP as Option in Config is False");
+                await LoggingService.Log($"Not Downloading File to FTP as Option in Config is False", logFileName, logToFile, outputToScreen);
             }
 
             //Load Excel File
-            Console.WriteLine("\nLoading Data from Excel");
-            Console.WriteLine($"Loading Excel File from {excelFilePath}");
+            await LoggingService.Log("\nLoading Data from Excel", logFileName, logToFile, outputToScreen);
+            await LoggingService.Log($"Loading Excel File from {excelFilePath}", logFileName, logToFile, outputToScreen);
 
             IWorkbook book;
             DataTable table;
@@ -340,7 +348,7 @@ namespace ExcelSQLImporter
                                             //Output types to check for specific column
                                             //if (colIndex == 35)
                                             //{
-                                            //    Console.WriteLine($"Value '{cellValue}' is {cellInRow.CellType}");
+                                            //    await LoggingService.Log($"Value '{cellValue}' is {cellInRow.CellType}");
                                             //}
                                         }
                                     }
@@ -464,15 +472,15 @@ namespace ExcelSQLImporter
             }
             else
             {
-                Console.WriteLine($"The File at {excelFilePath} Could Not Be Found");
+                await LoggingService.Log($"The File at {excelFilePath} Could Not Be Found", logFileName, logToFile, outputToScreen);
                 return 1;
             }
 
-            Console.WriteLine($"Loaded {table?.Rows.Count} rows of data from file");
+            await LoggingService.Log($"Loaded {table?.Rows.Count} rows of data from file", logFileName, logToFile, outputToScreen);
 
             //Save to Database
-            Console.WriteLine("\nSaving Data To Database");
-            Console.WriteLine($"Creating Table {table?.TableName} in Database");
+            await LoggingService.Log("\nSaving Data To Database", logFileName, logToFile, outputToScreen);
+            await LoggingService.Log($"Creating Table {table?.TableName} in Database", logFileName, logToFile, outputToScreen);
             await using var connection = new SqlConnection(connectionString);
 
             try
@@ -482,7 +490,7 @@ namespace ExcelSQLImporter
                 if (table != null)
                 {
                     string createTableSQL = CreateTableSQL(schemaName ?? "dbo", table?.TableName ?? "Imported_Excel_File", table!);
-                    //Console.WriteLine($"{createTableSQL}");
+                    //await LoggingService.Log($"{createTableSQL}");
 
                     using (SqlCommand command = new SqlCommand(createTableSQL, connection))
                         await command.ExecuteNonQueryAsync();
@@ -490,7 +498,7 @@ namespace ExcelSQLImporter
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                await LoggingService.Log(e.ToString(), logFileName, logToFile, outputToScreen);
 
                 if (connection != null)
                 {
@@ -500,7 +508,7 @@ namespace ExcelSQLImporter
                 return 1;
             }
 
-            Console.WriteLine($"Uploading {table?.Rows.Count} Rows of Data into Table {table?.TableName} in Database");
+            await LoggingService.Log($"Uploading {table?.Rows.Count} Rows of Data into Table {table?.TableName} in Database", logFileName, logToFile, outputToScreen);
 
             try
             {
@@ -511,7 +519,7 @@ namespace ExcelSQLImporter
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                await LoggingService.Log(e.ToString(), logFileName, logToFile, outputToScreen);
 
                 if (connection != null)
                 {
@@ -524,8 +532,8 @@ namespace ExcelSQLImporter
             //Run Stored Procedure On Completion
             if (storedProcedure.GetValue<bool?>("RunTask", false) == true)
             {
-                Console.WriteLine("\nRunning Post Import Stored Procedure");
-                Console.WriteLine($"Running Stored Procedure: {storedProcedure["Database"]}.{storedProcedure["Schema"]}.{storedProcedure["StoredProcedure"]}");
+                await LoggingService.Log("\nRunning Post Import Stored Procedure", logFileName, logToFile, outputToScreen);
+                await LoggingService.Log($"Running Stored Procedure: {storedProcedure["Database"]}.{storedProcedure["Schema"]}.{storedProcedure["StoredProcedure"]}", logFileName, logToFile, outputToScreen);
 
                 if (storedProcedure["StoredProcedure"]?.Length > 0)
                 {
@@ -534,17 +542,17 @@ namespace ExcelSQLImporter
                         if (table != null)
                         {
                             string customTaskSQL = $"EXEC {storedProcedure["Database"]}.{storedProcedure["Schema"]}.{storedProcedure["StoredProcedure"]}";
-                            //Console.WriteLine($"{createTableSQL}");
+                            //await LoggingService.Log($"{createTableSQL}");
 
                             using (SqlCommand command = new SqlCommand(customTaskSQL, connection))
                                 await command.ExecuteNonQueryAsync();
 
-                            Console.WriteLine($"Stored Procedure Completed");
+                            await LoggingService.Log($"Stored Procedure Completed", logFileName, logToFile, outputToScreen);
                         }
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.ToString());
+                        await LoggingService.Log(e.ToString(), logFileName, logToFile, outputToScreen);
 
                         if (connection != null)
                         {
@@ -556,7 +564,7 @@ namespace ExcelSQLImporter
                 }
                 else
                 {
-                    Console.WriteLine($"Cannot run stored procedure as it has not been specified in the config file");
+                    await LoggingService.Log($"Cannot run stored procedure as it has not been specified in the config file", logFileName, logToFile, outputToScreen);
                 }
             }
 
@@ -576,7 +584,7 @@ namespace ExcelSQLImporter
             sqlsc += $"\n CREATE TABLE [{schemaName ?? "dbo"}].[{tableName}] (";
 
             //Check Cell Value
-            //Console.WriteLine(table.Rows[1][4].ToString());
+            //await LoggingService.Log(table.Rows[1][4].ToString());
 
             for (int i = 0; i < table.Columns.Count; i++)
             {
@@ -621,7 +629,7 @@ namespace ExcelSQLImporter
                         for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++)
                         {
                             rowLength = (table.Rows[rowIndex][i].ToString() ?? "").Length;
-                            //Console.WriteLine($"Column: {i}, Row: {rowIndex}, Length: {rowLength}");
+                            //await LoggingService.Log($"Column: {i}, Row: {rowIndex}, Length: {rowLength}");
 
                             if (rowLength > maxRowLength)
                             {
