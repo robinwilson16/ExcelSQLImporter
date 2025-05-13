@@ -184,7 +184,6 @@ C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\ExcelSQLImporter.deps.json
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\ExcelSQLImporter.runtimeconfig.json
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\ExcelSQLImporter.dll
-C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\ExcelSQLImporter.pdb
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\Azure.Core.dll
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\Azure.Identity.dll
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\BouncyCastle.Cryptography.dll
@@ -343,7 +342,6 @@ C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\ExcelSQL.E47B41AD.Up2Date
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\ExcelSQLImporter.dll
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\refint\ExcelSQLImporter.dll
-C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\ExcelSQLImporter.pdb
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\ExcelSQLImporter.genruntimeconfig.cache
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\obj\Release\net9.0\ref\ExcelSQLImporter.dll
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\Microsoft.Bcl.Cryptography.dll
