@@ -3,14 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson\\source\\repos\\excelsqlimporter\\excelsqlimporter\\excelsqlimporter.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\excelsqlimporter.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson\\source\\repos\\excelsqlimporter\\excelsqlimporter\\excelsqlimporter.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\excelsqlimporter.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|c:\\users\\robin.wilson\\source\\repos\\excelsqlimporter\\excelsqlimporter\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DC2AE3A5-38F3-4A04-9983-1F87680FCCF0}|ExcelSQLImporter\\ExcelSQLImporter.csproj|solutionrelative:excelsqlimporter\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -38,40 +30,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoggingService.cs",
-              "DocumentMoniker": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\Services\\LoggingService.cs",
-              "RelativeDocumentMoniker": "ExcelSQLImporter\\Services\\LoggingService.cs",
-              "ToolTip": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\Services\\LoggingService.cs",
-              "RelativeToolTip": "ExcelSQLImporter\\Services\\LoggingService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T23:35:52.121Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ExcelSQLImporter",
-              "DocumentMoniker": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\ExcelSQLImporter.csproj",
-              "RelativeDocumentMoniker": "ExcelSQLImporter\\ExcelSQLImporter.csproj",
-              "ToolTip": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\ExcelSQLImporter.csproj",
-              "RelativeToolTip": "ExcelSQLImporter\\ExcelSQLImporter.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-20T18:01:18.785Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\Program.cs",
               "RelativeDocumentMoniker": "ExcelSQLImporter\\Program.cs",
@@ -84,7 +47,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\appsettings.json",
               "RelativeDocumentMoniker": "ExcelSQLImporter\\appsettings.json",
@@ -97,20 +60,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ExcelSQLImporter.csproj",
-              "DocumentMoniker": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\ExcelSQLImporter.csproj",
-              "RelativeDocumentMoniker": "ExcelSQLImporter\\ExcelSQLImporter.csproj",
-              "ToolTip": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\ExcelSQLImporter.csproj",
-              "RelativeToolTip": "ExcelSQLImporter\\ExcelSQLImporter.csproj",
-              "ViewState": "AgIAACwAAAAAAAAAAAAAAEQAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-01T13:39:33.01Z",
+              "DocumentIndex": 1,
+              "Title": "LoggingService.cs",
+              "DocumentMoniker": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\Services\\LoggingService.cs",
+              "RelativeDocumentMoniker": "ExcelSQLImporter\\Services\\LoggingService.cs",
+              "ToolTip": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\Services\\LoggingService.cs",
+              "RelativeToolTip": "ExcelSQLImporter\\Services\\LoggingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T23:35:52.121Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "appsettings3.json",
               "DocumentMoniker": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\appsettings3.json",
               "RelativeDocumentMoniker": "ExcelSQLImporter\\appsettings3.json",
@@ -123,7 +86,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "appsettings2.json",
               "DocumentMoniker": "C:\\Users\\robin.wilson\\source\\repos\\ExcelSQLImporter\\ExcelSQLImporter\\appsettings2.json",
               "RelativeDocumentMoniker": "ExcelSQLImporter\\appsettings2.json",

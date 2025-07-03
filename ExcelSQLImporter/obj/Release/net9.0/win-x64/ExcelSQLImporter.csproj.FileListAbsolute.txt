@@ -339,3 +339,4 @@ C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\win-x64\cs\Microsoft.Data.SqlClient.resources.dll
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\win-x64\pl\Microsoft.Data.SqlClient.resources.dll
 C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\win-x64\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\robin.wilson\source\repos\ExcelSQLImporter\ExcelSQLImporter\bin\Release\net9.0\win-x64\ZString.dll
