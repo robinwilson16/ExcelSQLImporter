@@ -348,7 +348,7 @@ namespace ExcelSQLImporter
                                             //Output types to check for specific column
                                             //if (colIndex == 35)
                                             //{
-                                            //    await LoggingService.Log($"Value '{cellValue}' is {cellInRow.CellType}");
+                                            //    await LoggingService.Log($"Value '{cellValue}' is {cellInRow.CellType}, Field Type set to {fieldType}", logFileName, logToFile, outputToScreen);
                                             //}
                                         }
                                     }
